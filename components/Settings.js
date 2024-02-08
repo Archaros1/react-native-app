@@ -1,7 +1,6 @@
 import { useRoute } from "@react-navigation/native";
-import { StyleSheet, Text, View } from "react-native";
-import { useCounterValue } from './CounterProvider';
-
+import { Button, StyleSheet, Text, View } from "react-native";
+import { useCounterValue, useResetCounterValue } from './CounterProvider';
 
 function Settings() {
   const route = useRoute();
@@ -9,6 +8,7 @@ function Settings() {
   const { params } = useRoute();
 
   const count = useCounterValue();
+  const resetCount = useResetCounterValue();
 
   return (
     <View style={[styles.container]}>
@@ -19,6 +19,12 @@ function Settings() {
 
         Count : {count}
       </Text>
+      <Button
+          onPress={() => {
+            resetCount();
+          }}
+          title="Reset counter"
+        />
     </View>
   );
 }
