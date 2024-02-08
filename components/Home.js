@@ -4,11 +4,14 @@ import { Title } from './Title';
 import { useState } from 'react';
 import { Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useCounterValue } from './CounterProvider';
 
 function Home() {
   const [color, setColor] = useState('purple');
   const [colorBack, setColorBack] = useState('blue');
   const [count, setCount] = useState(5);
+  const globalCount = useCounterValue();
+
   const navigation = useNavigation();
 
   return (
@@ -17,6 +20,7 @@ function Home() {
       }]}>
         <Title name="Arthur" color={color} />
         <Title name={count} />
+        <Title name={globalCount} color="brown" />
         <Button
           onPress={() => {
             setColor(color === "purple" ? "green" : "purple");

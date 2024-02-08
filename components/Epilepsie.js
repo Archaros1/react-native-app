@@ -3,18 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Title } from './Title';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-native';
+import { useCounterValue } from './CounterProvider';
 
 function Epilepsie() {
   const [color, setColor] = useState('purple');
   const [colorBack, setColorBack] = useState('purple');
-  const [count, setCount] = useState(5);
 
-  // Every 1000ms, trigger setCount
-  useEffect(() => {
-    setInterval(() => {
-      setCount((currentCounter) => (currentCounter + 1) % 360)
-    }, 1000)
-  }, [])
+  const count = useCounterValue();
 
   // When count change, trigger setColor & setColorBack
   useEffect(() => {
@@ -22,7 +17,7 @@ function Epilepsie() {
     setColorBack(colorBack === "red" ? "blue" : "red");
   }, [count])
 
-  // "let" instead of "const" means this value is not conserved between renderings.
+  // "let" instead of "const" means this value is not conserved between renderings. To avoid.
   let rotation = "rotateX("+count+"deg);rotateY("+count+"deg);rotateZ("+count+"deg);";
 
   return (
