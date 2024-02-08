@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 
 const CounterContext = createContext(0);
-const SetCounterContext = createContext(0);
+const ResetCounterContext = createContext(0);
 
 export function CounterProvider({ children }) {
   const [count, setCount] = useState(0);
@@ -20,9 +20,9 @@ export function CounterProvider({ children }) {
 
   return (
     <CounterContext.Provider value={count}>
-      <SetCounterContext.Provider value={resetCounterValue}>
+      <ResetCounterContext.Provider value={resetCounterValue}>
         {children}
-      </SetCounterContext.Provider>
+      </ResetCounterContext.Provider>
     </CounterContext.Provider>
   )
 }
@@ -32,5 +32,5 @@ export const useCounterValue = () => {
 };
 
 export const useResetCounterValue = () => {
-  return useContext(SetCounterContext);
+  return useContext(ResetCounterContext);
 };
